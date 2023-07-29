@@ -1,20 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Provider } from 'react-redux';
+import { QueryClientProvider } from 'react-query';
+import store from './src/redux/store';
+import { Navigation } from './src/navigation';
+import { queryClient } from './src/utils/react-query/query-client';
+import "react-native-url-polyfill/auto"
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <StatusBar style="auto" />
+        <Navigation />
+      </QueryClientProvider>
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
